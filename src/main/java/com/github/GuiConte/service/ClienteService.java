@@ -12,5 +12,7 @@ public interface ClienteService {
 
     void delete(Integer cod_cliente);
 
-    List<Cliente> findAll ();
+    List<Cliente> findAll();
+
+    List<Cliente> findWithFilter(Cliente filter);
 }

@@ -21,9 +21,14 @@ public class ClienteController {
         return clienteService.save(cliente);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Cliente> findAll(){
         return clienteService.findAll();
+    }
+
+    @GetMapping
+    public List<Cliente> findWithFilter(Cliente filter){
+        return clienteService.findWithFilter(filter);
     }
 
     @PutMapping("{cod_cliente}")
@@ -31,6 +36,12 @@ public class ClienteController {
     public void update(@PathVariable(name = "cod_cliente") Integer cod_cliente,
                                 @RequestBody Cliente cliente){
         clienteService.update(cod_cliente,cliente);
+    }
+
+    @DeleteMapping("{cod_cliente}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable(name = "cod_cliente") Integer cod_cliente){
+        clienteService.delete(cod_cliente);
     }
 
 
