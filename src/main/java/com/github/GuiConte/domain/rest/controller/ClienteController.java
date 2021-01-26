@@ -30,7 +30,7 @@ public class ClienteController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable(name = "cod_cliente") Integer cod_cliente,
                                 @RequestBody Cliente cliente){
-
+        clienteService.update(cod_cliente,cliente);
     }
 
 

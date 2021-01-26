@@ -4,7 +4,9 @@ import com.github.GuiConte.domain.entity.Cliente;
 import com.github.GuiConte.domain.repository.Clientes;
 import com.github.GuiConte.service.ClienteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -21,7 +23,15 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void update(Integer cod_cliente, Cliente cliente) {
-
+        clientesRepository.findById(cod_cliente)
+                .map(clienteExistente -> {
+                    cliente.setCod_cliente(clienteExistente.getCod_cliente());
+                    clientesRepository.save(cliente);
+                    return cliente;
+                })
+                .orElseThrow(
+                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente não encontrado !")
+                );
     }
 
     @Override
