@@ -1,7 +1,7 @@
-package com.github.GuiConte.domain.rest.controller;
+package com.guiconte.controller;
 
-import com.github.GuiConte.domain.entity.Cliente;
-import com.github.GuiConte.service.ClienteService;
+import com.guiconte.domain.entity.Cliente;
+import com.guiconte.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

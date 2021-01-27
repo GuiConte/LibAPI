@@ -1,4 +1,4 @@
-package com.github.GuiConte;
+package com.guiconte;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,8 +1,8 @@
-package com.github.GuiConte.service.impl;
+package com.guiconte.service.impl;
 
-import com.github.GuiConte.domain.entity.Cliente;
-import com.github.GuiConte.domain.repository.Clientes;
-import com.github.GuiConte.service.ClienteService;
+import com.guiconte.domain.entity.Cliente;
+import com.guiconte.repository.Clientes;
+import com.guiconte.service.ClienteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;

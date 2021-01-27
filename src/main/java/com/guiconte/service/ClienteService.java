@@ -1,6 +1,6 @@
-package com.github.GuiConte.service;
+package com.guiconte.service;
 
-import com.github.GuiConte.domain.entity.Cliente;
+import com.guiconte.domain.entity.Cliente;
 
 import java.util.List;
 

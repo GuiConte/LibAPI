@@ -1,4 +1,4 @@
-package com.github.GuiConte.domain.entity;
+package com.guiconte.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
