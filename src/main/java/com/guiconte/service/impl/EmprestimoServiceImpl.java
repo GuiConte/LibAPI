@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -44,7 +45,6 @@ public class EmprestimoServiceImpl implements EmprestimoService {
         Emprestimo emprestimo = new Emprestimo();
         emprestimo.setCliente(cliente);
         emprestimo.setDataEmprestimo(emprestimoDTO.getData_emprestimo());
-        emprestimo.setDataDevolucao(emprestimoDTO.getData_devolucao());
         emprestimo.setStatusEmprestimo(StatusEmprestimo.ABERTO);
 
         List<ItemEmprestimo> itemsEmprestimo = convertItems(emprestimo,emprestimoDTO.getLivros());
@@ -65,6 +65,11 @@ public class EmprestimoServiceImpl implements EmprestimoService {
                 .findById(cod_eprestimo)
                 .map(emprestimo -> {
                     emprestimo.setStatusEmprestimo(statusEmprestimo);
+                    if(statusEmprestimo.name().equals("CONCLUIDO")){
+                        emprestimo.setDataDevolucao(LocalDate.now());
+                    }else{
+                        emprestimo.setDataDevolucao(null);
+                    }
                     return emprestimosRepository.save(emprestimo);
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,

@@ -53,8 +53,8 @@ public class EmprestimoController {
                 .codigo(emprestimo.getCod_emprestimo())
                 .cpf(emprestimo.getCliente().getCpf())
                 .cliente(emprestimo.getCliente().getNome())
-                .data_emprestimo(emprestimo.getDataEmprestimo().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
-                .data_devolucao(emprestimo.getDataDevolucao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                .data_emprestimo(emprestimo.getDataEmprestimo())
+                .data_devolucao(emprestimo.getDataDevolucao())
                 .status(emprestimo.getStatusEmprestimo().name())
                 .livros(convertDTO(emprestimo.getLivros()))
                 .build();

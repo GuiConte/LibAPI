@@ -13,8 +13,8 @@ CREATE TABLE LIVRO(
 CREATE TABLE EMPRESTIMO(
     cod_emprestimo INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     cod_cliente INT REFERENCES CLIENTE(cod_cliente),
-    data_emprestimo timestamp,
-    data_devolucao timestamp,
+    data_emprestimo DATE,
+    data_devolucao DATE,
     status varchar(20)
 )
 

@@ -18,7 +18,5 @@ public class EmprestimoDTO {
 
     private LocalDate data_emprestimo;
 
-    private LocalDate data_devolucao;
-
     private List<ItemEmprestimoDTO> livros;
 }

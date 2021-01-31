@@ -36,5 +36,4 @@ public class Emprestimo {
 
     @OneToMany(mappedBy = "emprestimo")
     private List<ItemEmprestimo> livros;
-
 }
