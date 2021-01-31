@@ -6,5 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AtualizacaoStatusEmprestimoDTO {
-    private String novoStatus;
+    private String novo_status;
 }
