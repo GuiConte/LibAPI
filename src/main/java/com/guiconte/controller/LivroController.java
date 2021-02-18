@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,7 @@ public class LivroController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Livro save(@RequestBody Livro livro){
+    public Livro save(@RequestBody @Valid Livro livro){
         return livroService.save(livro);
     }
 
@@ -34,7 +35,7 @@ public class LivroController {
     @PutMapping("{cod_livro}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update (@PathVariable(name = "cod_livro") Integer cod_livro,
-                                @RequestBody Livro livro){
+                                @RequestBody @Valid Livro livro){
         livroService.update(cod_livro,livro);
     }
 

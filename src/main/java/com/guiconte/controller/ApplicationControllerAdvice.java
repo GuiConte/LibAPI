@@ -2,6 +2,7 @@ package com.guiconte.controller;
 
 import com.guiconte.ApiErrors;
 import com.guiconte.exception.ClienteNotFoundException;
+import com.guiconte.exception.LivroNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -27,8 +28,14 @@ public class ApplicationControllerAdvice {
     }
 
     @ExceptionHandler(ClienteNotFoundException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ApiErrors handleClienteNotFoundException(ClienteNotFoundException ex){
+        return new ApiErrors(ex.getMessage());
+    }
+
+    @ExceptionHandler(LivroNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiErrors handleLivroNotFoundException(LivroNotFoundException ex){
         return new ApiErrors(ex.getMessage());
     }
 }

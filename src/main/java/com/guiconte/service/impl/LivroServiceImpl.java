@@ -1,6 +1,7 @@
 package com.guiconte.service.impl;
 
 import com.guiconte.domain.entity.Livro;
+import com.guiconte.exception.LivroNotFoundException;
 import com.guiconte.repository.Livros;
 import com.guiconte.service.LivroService;
 import lombok.RequiredArgsConstructor;
@@ -47,7 +48,7 @@ public class LivroServiceImpl implements LivroService {
                     return livro;
                 })
                 .orElseThrow(
-                        ()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Livro não encontrado !")
+                        ()-> new LivroNotFoundException()
                 );
     }
 
@@ -59,7 +60,7 @@ public class LivroServiceImpl implements LivroService {
                     return livroExistente;
                 })
                 .orElseThrow(
-                        ()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Livro não encontrado !")
+                        ()-> new LivroNotFoundException()
                 );
     }
 }

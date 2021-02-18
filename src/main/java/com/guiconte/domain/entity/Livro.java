@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Data
 @NoArgsConstructor
@@ -18,9 +19,11 @@ public class Livro {
     private Integer cod_livro;
 
     @Column(name = "titulo",length = 100)
+    @NotEmpty(message = "{field.titulo.required}")
     private String titulo;
 
     @Column(name = "isbn", length = 20)
+    @NotEmpty(message = "{field.isbn.required}")
     private String isbn;
 
 }
