@@ -7,13 +7,14 @@ import com.guiconte.dto.AtualizacaoStatusEmprestimoDTO;
 import com.guiconte.dto.EmprestimoDTO;
 import com.guiconte.dto.InformacaoEmprestimoDTO;
 import com.guiconte.dto.InformacaoItemEmprestimoDTO;
+import com.guiconte.exception.EmprestimoNotFoundException;
 import com.guiconte.service.EmprestimoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,21 +28,21 @@ public class EmprestimoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Integer save(@RequestBody EmprestimoDTO emprestimoDTO){
+    public InformacaoEmprestimoDTO save(@RequestBody @Valid EmprestimoDTO emprestimoDTO){
         Emprestimo emprestimo = emprestimoService.save(emprestimoDTO);
-        return emprestimo.getCod_emprestimo();
+        return convertDTO(emprestimo);
     }
 
     @GetMapping("{cod_emprestimo}")
     public InformacaoEmprestimoDTO find(@PathVariable Integer cod_emprestimo){
         return emprestimoService.find(cod_emprestimo)
                 .map( emprestimo -> convertDTO(emprestimo))
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Pedido não encontrado !"));
+                .orElseThrow( () -> new EmprestimoNotFoundException());
     }
 
     @PatchMapping("{cod_emprestimo}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateStatus(@PathVariable Integer cod_emprestimo, @RequestBody AtualizacaoStatusEmprestimoDTO dto){
+    public void updateStatus(@PathVariable Integer cod_emprestimo, @RequestBody @Valid AtualizacaoStatusEmprestimoDTO dto){
         String novoStatus = dto.getNovo_status();
         emprestimoService.updateStatus(cod_emprestimo, StatusEmprestimo.valueOf(novoStatus));
     }

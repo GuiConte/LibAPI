@@ -7,6 +7,10 @@ import com.guiconte.domain.entity.Livro;
 import com.guiconte.domain.enums.StatusEmprestimo;
 import com.guiconte.dto.EmprestimoDTO;
 import com.guiconte.dto.ItemEmprestimoDTO;
+import com.guiconte.exception.ClienteNotFoundException;
+import com.guiconte.exception.EmprestimoNotFoundException;
+import com.guiconte.exception.EmprestimoWithoutItemsException;
+import com.guiconte.exception.LivroNotFoundException;
 import com.guiconte.repository.Clientes;
 import com.guiconte.repository.Emprestimos;
 import com.guiconte.repository.ItemsEmprestimo;
@@ -39,7 +43,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
         Cliente cliente = clientesRepository
                         .findById(cod_cliente)
                         .orElseThrow(
-                            () -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Codigo de cliente invalido !")
+                            () -> new ClienteNotFoundException()
                         );
 
         Emprestimo emprestimo = new Emprestimo();
@@ -72,14 +76,13 @@ public class EmprestimoServiceImpl implements EmprestimoService {
                     }
                     return emprestimosRepository.save(emprestimo);
                 })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                                        "Emprestimo não encontrado !"));
+                .orElseThrow(() -> new EmprestimoNotFoundException());
 
     }
 
     private List<ItemEmprestimo> convertItems (Emprestimo emprestimo, List<ItemEmprestimoDTO> items){
         if(items.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Não é possivel realizar emprestimo sem itens!");
+            throw new EmprestimoWithoutItemsException();
         }
         return items
                 .stream()
@@ -87,8 +90,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
                     Integer cod_livro = dto.getCod_livro();
                     Livro livro = livrosRepository
                             .findById(cod_livro)
-                            .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                                            "Codigo de livro invalido !"));
+                            .orElseThrow(() -> new LivroNotFoundException());
 
                     ItemEmprestimo itemEmprestimo = new ItemEmprestimo();
                     itemEmprestimo.setEmprestimo(emprestimo);
