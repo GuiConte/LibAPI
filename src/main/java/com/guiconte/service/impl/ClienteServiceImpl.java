@@ -1,14 +1,13 @@
 package com.guiconte.service.impl;
 
 import com.guiconte.domain.entity.Cliente;
+import com.guiconte.exception.ClienteNotFoundException;
 import com.guiconte.repository.Clientes;
 import com.guiconte.service.ClienteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class ClienteServiceImpl implements ClienteService {
                     return cliente;
                 })
                 .orElseThrow(
-                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente não encontrado !")
+                        () -> new ClienteNotFoundException()
                 );
     }
 
@@ -44,7 +43,7 @@ public class ClienteServiceImpl implements ClienteService {
                     return clienteExistente;
                 })
                 .orElseThrow(
-                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente não encontrado !")
+                        () -> new ClienteNotFoundException()
                 );
     }
 
