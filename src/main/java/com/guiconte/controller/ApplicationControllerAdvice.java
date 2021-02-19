@@ -1,10 +1,7 @@
 package com.guiconte.controller;
 
 import com.guiconte.ApiErrors;
-import com.guiconte.exception.ClienteNotFoundException;
-import com.guiconte.exception.EmprestimoNotFoundException;
-import com.guiconte.exception.EmprestimoWithoutItemsException;
-import com.guiconte.exception.LivroNotFoundException;
+import com.guiconte.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -50,6 +47,12 @@ public class ApplicationControllerAdvice {
     @ExceptionHandler(EmprestimoWithoutItemsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiErrors handleEmprestimoWithoutItemsException(EmprestimoWithoutItemsException ex){
+        return new ApiErrors(ex.getMessage());
+    }
+
+    @ExceptionHandler(InvalidStatusException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiErrors handleInvalidStatusException(InvalidStatusException ex){
         return new ApiErrors(ex.getMessage());
     }
 }

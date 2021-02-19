@@ -1,17 +1,18 @@
 package com.guiconte.service;
 
-import com.guiconte.domain.entity.Emprestimo;
-import com.guiconte.domain.enums.StatusEmprestimo;
 import com.guiconte.dto.EmprestimoDTO;
+import com.guiconte.dto.InformacaoEmprestimoDTO;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface EmprestimoService {
 
-    Emprestimo save(EmprestimoDTO emprestimoDTO);
+    InformacaoEmprestimoDTO save(EmprestimoDTO emprestimoDTO);
 
-    Optional<Emprestimo> find(Integer cod_emprestimo);
+    InformacaoEmprestimoDTO find(Integer cod_emprestimo);
 
-    void updateStatus(Integer cod_eprestimo, StatusEmprestimo statusEmprestimo);
+    List<InformacaoEmprestimoDTO> findAll();
+
+    void updateStatus(Integer cod_eprestimo, String status);
 
 }

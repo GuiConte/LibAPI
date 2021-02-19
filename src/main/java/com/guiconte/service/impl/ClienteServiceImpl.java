@@ -30,9 +30,7 @@ public class ClienteServiceImpl implements ClienteService {
                     clientesRepository.save(cliente);
                     return cliente;
                 })
-                .orElseThrow(
-                        () -> new ClienteNotFoundException()
-                );
+                .orElseThrow(() -> new ClienteNotFoundException());
     }
 
     @Override
@@ -42,9 +40,7 @@ public class ClienteServiceImpl implements ClienteService {
                     clientesRepository.delete(clienteExistente);
                     return clienteExistente;
                 })
-                .orElseThrow(
-                        () -> new ClienteNotFoundException()
-                );
+                .orElseThrow(() -> new ClienteNotFoundException());
     }
 
     @Override
