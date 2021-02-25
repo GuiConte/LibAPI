@@ -23,8 +23,8 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public void update(Integer cod_cliente, Cliente cliente) {
-        clientesRepository.findById(cod_cliente)
+    public Cliente update(Integer cod_cliente, Cliente cliente) {
+        return clientesRepository.findById(cod_cliente)
                 .map(clienteExistente -> {
                     cliente.setCod_cliente(clienteExistente.getCod_cliente());
                     clientesRepository.save(cliente);

@@ -8,7 +8,7 @@ public interface ClienteService {
 
     Cliente save(Cliente cliente);
 
-    void update(Integer cod_cliente,Cliente cliente);
+    Cliente update(Integer cod_cliente,Cliente cliente);
 
     void delete(Integer cod_cliente);
 
